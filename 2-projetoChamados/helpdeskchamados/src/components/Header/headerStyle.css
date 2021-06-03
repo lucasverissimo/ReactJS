@@ -1,0 +1,97 @@
+.sidebar{
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #181c2e;
+    position: fixed;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.sidebar div{
+    background: url("../../assets/cover.png");
+    background-color: #181c2e;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 150px;
+    padding-top: 30px;
+}
+
+.sidebar div img{
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+    width: 90px;
+    height: 90px;
+    -webkit-filter: drop-shadow(2px 3px 6px #121212);
+    filter: drop-shadow(2px 3px 6px #121212);
+    object-fit: cover;
+}
+
+.sidebar ul{
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.sidebar ul li{
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.sidebar ul li a{
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    transition: ease-in-out 0.4s;
+}
+
+.sidebar ul li a:hover{
+    background-color: #000;
+    color: #fff;
+    transition: ease-in-out 0.4s;
+}
+
+.sidebar ul li a svg{
+    margin-right: 5px;
+}
+
+
+@media screen and (max-width: 768px){
+    .sidebar{
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .sidebar ul li{
+        display: inline-block;
+        width: auto;
+    }
+
+    .sidebar div{
+        display: none;
+    }
+    .sidebar ul li a svg{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 798px){
+
+    .content{
+        margin-left: 200px;
+    }
+}
+
+.content{
+    padding: 1px 16px;
+}
+

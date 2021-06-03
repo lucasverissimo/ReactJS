@@ -1,0 +1,55 @@
+body{
+  background-color: #00aaff
+}
+
+.container{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.img{
+  width: 250px;
+  height: auto;
+  margin-top: 150px;
+}
+
+h2{
+  padding: 0;
+  font-size: 50px;
+  margin-top: -150px;
+  margin-bottom: 0;
+  position: relative;
+  color: #fff;
+}
+
+.areaBtn{
+  height: auto;
+  flex-direction: row;
+  padding: 25px;
+  margin-top: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
+.botao{
+  padding: 10px 25px;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  margin: 0 10px;
+  background-color: #00aaff;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;  
+  font-size: 14px;
+  text-transform: uppercase;  
+  transition: all 0.5s;
+}
+
+.botao:hover{
+  background-color: #fff;
+  color: #00aaff;
+  transition: all 0.5s;
+}

@@ -1,0 +1,95 @@
+.container{
+    display: flex;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    padding: .8em;
+    align-items: center;  
+    margin-bottom: 20px;
+}
+
+.label-avatar{
+    width: 280px;
+    height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.label-avatar input{
+    display: none;    
+}
+
+.label-avatar span{
+    z-index: 99;
+    position: absolute;
+    opacity: 0.7;
+    transition: all .5s;
+}
+
+.label-avatar span:hover{
+    opacity: 1;
+    transform: scale(1.4);
+}
+.form-profile{
+    text-align: left;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+}
+.form-profile img{
+    margin-bottom: 1em;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.form-profile label{
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.form-profile input, .form-profile textarea, .form-profile select{
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 0;
+    border-radius: 5px;
+    max-width: 600px;
+}
+
+.form-profile input:disabled{
+    cursor: not-allowed;
+}
+
+.form-profile .btnSalvar{
+    padding: 15px;
+    width: auto;
+    height: auto;
+    color: #fff;
+    background-color: #121212;
+    border-radius: 5px;
+    border: 0;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+@media screen and (min-width: 768px){
+    .form-profile .btnSalvar, .logout-btn{        
+        min-width: 600px;
+    }
+}
+@media screen and (max-width: 767px){
+    .form-profile .btnSalvar, .logout-btn{        
+        width: 100%;
+    }
+}
+
+.logout-btn{
+    background-color: transparent;
+    border: 1px solid #121212;
+    border-radius: 5px;
+    font-size: 16px;    
+    padding: 15px;
+    text-align: center;
+    color: #000;
+}

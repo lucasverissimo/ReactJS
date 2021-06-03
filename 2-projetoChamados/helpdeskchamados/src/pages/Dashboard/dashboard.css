@@ -1,0 +1,38 @@
+
+.dashboard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.dashboard span{
+    margin: 30px 0;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.btnNovoChamado{
+    float: right;
+    margin-bottom: 20px;
+    background-color: #83bf02;
+    color: #fff;
+    border: 0;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 6px;
+    transition: ease-in 0.2s;
+}
+
+.btnNovoChamado svg{
+    margin-right: 5px;
+}
+
+.btnNovoChamado:hover{
+    background-color: #5fd204;
+    transform: scale(1.1);    
+}
