@@ -1,0 +1,33 @@
+.title{
+    color: #fff;
+}
+
+.reservas{
+    padding: 20px;
+    margin-bottom: 10px;
+    background: #fff;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reservas img{
+    max-height: 100px;
+}
+
+.reservas button{
+    border: 0;
+    background: transparent;
+}
+
+.rodapeReservas button{
+    border: 0;
+    display: flex;
+    padding: 10px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    margin-top: 15px;
+    font-weight: bold;
+}
