@@ -31,3 +31,29 @@
     margin-top: 15px;
     font-weight: bold;
 }
+
+.ammountDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.ammountDiv input{
+    border: 1px solid #eee;
+    background: #ccc;
+    border-radius: 4px;
+    color: #121212;
+    padding: 10px 5px;
+    width: 50px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.ammountDiv button{
+    padding: 5px 10px;
+    border: 0;
+    background-color: transparent;
+    margin: 0 5px;
+}

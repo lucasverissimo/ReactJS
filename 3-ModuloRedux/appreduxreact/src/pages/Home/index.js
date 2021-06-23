@@ -4,7 +4,9 @@ import api from '../../services/api';
 import { MdFlightTakeoff } from 'react-icons/md';
 import './home.css';
 
-export default function Home() {
+import { addReserveRequest } from '../../store/modules/reserve/actions';
+
+export default function Home({history}) {
 
     const dispatch = useDispatch();
     const [trips, setTrips] = useState([]);
@@ -21,11 +23,8 @@ export default function Home() {
     }, []);
 
 
-    function handleAdd(trip){
-        dispatch({
-            type: 'ADD_RESERVER',
-            trip,
-        });
+    function handleAdd(id){
+        dispatch(addReserveRequest(id));        
     }
 
  return (
@@ -36,7 +35,7 @@ export default function Home() {
                    <img src={trip.image} alt={trip.title} />
                    <strong>{trip.title}</strong>
                    <span>Status: {trip.status ? 'Disponível' : 'Indisponível'}</span>
-                   <button type="button" onClick={()=> handleAdd(trip)}>
+                   <button type="button" onClick={()=> handleAdd(trip.id)}>
                        <MdFlightTakeoff size={18} color="#fff" />
                         <span>
                             Solicitar Reserva   
