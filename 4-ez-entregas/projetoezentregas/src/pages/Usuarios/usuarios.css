@@ -1,0 +1,60 @@
+
+.ListaUsuarios{
+    width: 100%;
+    height: auto;
+    background-color: #444;
+    margin-top: 15px;
+    border-radius: 3px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ListaUsuarios .tituloLista,
+.ListaUsuarios .itemLista{
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ListaUsuarios .tituloLista .blocoTituloLista{
+    font-size: 18px;
+    font-weight: bold;    
+}
+
+.ListaUsuarios .t1{ width: 30%;}
+.ListaUsuarios .t2{ width: 30%;}
+.ListaUsuarios .t3{ width: 10%;}
+.ListaUsuarios .t4{ width: 30%; text-align: right;}
+
+.ListaUsuarios .itemLista{
+    padding: 5px 0;
+}
+
+.ListaUsuarios .itemLista div{
+    font-size: 16px;
+    color: #aaa;    
+}
+
+.ListaUsuarios .itemLista div .btnEditar,
+.ListaUsuarios .itemLista div .btnExcluir{
+    border-radius: 3px;
+    border: 0;
+    padding: 10px;
+}
+.ListaUsuarios .itemLista div .btnEditar{
+    background-color: #66d166;
+}
+
+.ListaUsuarios .itemLista div .btnExcluir{
+    background-color: #d16666;
+    margin-right: 15px;
+}
+
+.hide{
+    display: none !important;
+}
