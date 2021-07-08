@@ -1,6 +1,6 @@
 
 export default function usuario(state = [], action){
-    console.log(action);
+//    console.log(action);
     switch(action.type){
 
         case 'AUTENTICAR_SUCCESS':
@@ -17,7 +17,7 @@ export default function usuario(state = [], action){
         
             if(localStorage.getItem("AUTH_USER")){
                 const user = JSON.parse(localStorage.getItem("AUTH_USER"));
-                console.log(user);
+            //    console.log(user);
                 state = user;
                 return state;
             }else{

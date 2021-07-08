@@ -18,6 +18,9 @@
     width: 70%;
     margin-bottom: 0;
     padding-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .title-pages .group-btn-title{
@@ -42,4 +45,9 @@
 .title-pages .group-btn-title button:active svg,
 .title-pages .group-btn-title a:active svg{
     fill:#fff
+}
+
+.title-pages h1 a {
+    display: inline-block;
+    margin-right: 20px;
 }

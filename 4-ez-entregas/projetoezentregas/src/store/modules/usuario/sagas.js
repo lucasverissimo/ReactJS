@@ -1,10 +1,10 @@
-import { select, all, takeLatest, put } from 'redux-saga/effects';
+import { all, takeLatest, put } from 'redux-saga/effects';
 import firebase from '../../../services/firebaseConfig';
 import { autenticarSuccess, logoutSuccess } from './actions';
-import history from '../../../services/history';
 
 function* autenticarUsuario({ dados }){
 
+    console.log('autenticando!');
     /*yield select(
         state => {
             console.log(state);

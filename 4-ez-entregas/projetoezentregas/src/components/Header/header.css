@@ -171,6 +171,7 @@ border: 3px solid transparent;  /* creates padding around scroll thumb */
     color: #fff;
     font-weight: normal;  
     margin-bottom: 0;  
+    cursor: pointer;
 
 }
 

@@ -4,18 +4,33 @@ import './usuarios.css';
 import Header from '../../components/Header';
 import Title from '../../components/Title';
 import { Link } from 'react-router-dom';
-
+import DatabaseConnection from '../../database/DatabaseConnection';
 import { MdAdd, MdDelete, MdEdit } from 'react-icons/md';
 
 export default function Usuarios() {
 
-    const [ listaUsuarios, setListaUsuarios ] = useState([/*
-        {id: 1, nome: 'Lucas Garcez', email:'lucas_verissimo@outlook.com', ativo:true},
-        {id: 2, nome: 'Lucas Garcez', email:'lucas_verissimo@outlook.com', ativo:false},
-        {id: 3, nome: 'Lucas Garcez', email:'lucas_verissimo@outlook.com', ativo:true},
-        {id: 4, nome: 'Lucas Garcez', email:'lucas_verissimo@outlook.com', ativo:true},
-        {id: 5, nome: 'Lucas Garcez', email:'lucas_verissimo@outlook.com', ativo:false},*/
-    ]);
+    const db = new DatabaseConnection('usuarios');
+    const [ listaUsuarios, setListaUsuarios ] = useState([]);
+    const [ loadingLista, setLoadingLista ] = useState(true);
+
+    useEffect(()=>{
+        db.getListDocuments().then((result)=>{
+            setListaUsuarios(result);             
+            setLoadingLista(false);           
+        }).catch((error)=>{
+            alert("Erro ao realizar consulta!");
+            console.log(error);
+        });        
+    }, []);
+
+    useEffect(() => {
+        return () => {
+          setListaUsuarios([]);
+          console.log("cleaned up");
+        };
+      }, []);
+
+    
 
  return (
     <div className="container-principal">
@@ -45,29 +60,29 @@ export default function Usuarios() {
                         Ações
                     </div>
                 </div>
+                { loadingLista && (<div>Carregando Lista...</div>)}
+
+                <div className={loadingLista === true ? `hide` : ``}>
                 {listaUsuarios.length === 0 ? (
                     <div>Nenehum item encontrado!</div>
                 ) 
                 : 
-                listaUsuarios.map((usuario, index) => {
+                listaUsuarios.map((usuario, index) => {                    
                     return(
                         <div className="itemLista" key={index}>
                             <div className="t1">{usuario.nome}</div>
                             <div className="t2">{usuario.email}</div>
                             <div className="t3">{usuario.ativo === true ? 'Sim' : 'Não'}</div>
-                            <div className="t4">                                
-                                <button className="btnExcluir">
-                                    <MdDelete size={18} color="#fff" />
-                                </button>
-
-                                <button className="btnEditar">
+                            <div className="t4">  
+                                <Link className="btnEditar" to={`/form-usuarios/${usuario.id}`}>
                                     <MdEdit size={18} color="#fff" />
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     )
                 })}
-                
+
+                </div>
             </div>
         </div>
     </div>

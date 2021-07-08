@@ -1,0 +1,34 @@
+.form-group{
+    display: flex;
+    flex-direction: column;    
+}
+
+.form-group .form-input{
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.form-group .form-input label{
+    display: block;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.form-group .form-input input,
+.form-group .form-input select{
+    width: auto;
+    max-width: 100%;
+    min-width: 300px;
+}
+
+.btnSuccess{
+    background-color: #66d166;
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.btnSuccess:hover{
+    color: #fff;
+}

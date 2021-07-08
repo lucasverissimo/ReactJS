@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './header.css';
 import Logo from '../../assets/logo-white.png'; 
 import { 
@@ -16,6 +16,13 @@ export default function Header() {
 
     const [ showMenu, setShowMenu ] = useState(false);
     const [ activeMenu, setActiveMenu ] = useState(false);
+    const [ nomeUsuario, setNomeUsuario ] = useState('');
+
+    useEffect(()=>{
+        let infoUser = JSON.parse(localStorage.getItem("AUTH_USER"));
+        setNomeUsuario(infoUser.nome);
+    },[]);
+    
 
     function showLeftMenu(){
         if(showMenu === false){
@@ -61,7 +68,7 @@ export default function Header() {
             <img src={Logo} alt="Ez Entregas - Seu Delivery Online" className="LogoHeader" />
             <div className="mensagemUsuario">
                 <p className="l1">Seja bem-vindo!</p>
-                <p className="l2">Nome do usuário</p>
+                <p className="l2">{nomeUsuario}</p>
             </div>
         </div> 
         <div className="listaMenuHeader">
@@ -74,7 +81,7 @@ export default function Header() {
                 </li>
 
                 <li>
-                    <label>
+                    <label onClick={() => expandMenu('menuCatalogo')}>
                         <MdViewList size={25} color="#fff" /> 
                         Catálogo
                     </label>
@@ -88,21 +95,20 @@ export default function Header() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/categorias">
-                                Categorias
-                            </Link>
-                        </li>
-                        <li>
                             <Link to="/produtos-complementares">
                                 Produtos complementares
                             </Link>
                         </li>
-                        
+                        <li>
+                            <Link to="/categorias">
+                                Categorias
+                            </Link>
+                        </li>                        
                     </ul>
                 </li>
 
                 <li>
-                    <label>
+                    <label onClick={() => expandMenu('menuVendas')}>
                         <MdAttachMoney size={25} color="#fff" /> 
                         Vendas
                     </label>
@@ -136,7 +142,7 @@ export default function Header() {
                 </li>
 
                 <li>
-                    <label>
+                    <label onClick={() => expandMenu('menuMarketing')}>
                         <MdLightbulbOutline size={25} color="#fff" /> 
                         Marketing
                     </label>
@@ -171,7 +177,7 @@ export default function Header() {
                 </li>
 
                 <li>
-                    <label>
+                    <label onClick={() => expandMenu('menuConfig')}>
                         <MdSettings size={25} color="#fff" /> 
                         Configurações
                     </label>

@@ -3,7 +3,7 @@ import './title.css';
 
 export default function Title({children}) {
  return (
-   <div class="title-pages">
+   <div className="title-pages">
        {children}
    </div>
  );

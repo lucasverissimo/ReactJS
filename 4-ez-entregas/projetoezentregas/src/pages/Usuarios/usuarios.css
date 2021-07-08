@@ -1,5 +1,5 @@
 
-.ListaUsuarios{
+.ListaUsuarios, .ContainerConteudo{
     width: 100%;
     height: auto;
     background-color: #444;
@@ -14,7 +14,7 @@
 .ListaUsuarios .itemLista{
     width: 100%;
     height: auto;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -32,7 +32,10 @@
 .ListaUsuarios .t4{ width: 30%; text-align: right;}
 
 .ListaUsuarios .itemLista{
-    padding: 5px 0;
+    padding: 5px 15px;
+    min-height: 65px;
+    margin: 5px 0;
+    border-radius: 4px;
 }
 
 .ListaUsuarios .itemLista div{
@@ -57,4 +60,9 @@
 
 .hide{
     display: none !important;
+}
+
+.ListaUsuarios .itemLista p{
+    margin: 0;
+    padding: 0;
 }
