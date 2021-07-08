@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import firebase from '../services/firebaseConfig';
 
 export default class DatabaseConnection {
@@ -22,9 +21,13 @@ export default class DatabaseConnection {
     return result;
   }
 
-  async getListDocuments(numItems = 5, fieldOrderBy = null, orderByValue = 'asc'){
+  async getListDocuments(numItems = 5, fieldOrderBy = null, orderByValue = 'asc', whereField = null, whereValue = null){
 
     let ref = this.ref;
+
+    if(whereField !== null && whereValue !== null){
+      ref = ref.where(whereField, "==", whereValue);
+    }
 
     if(fieldOrderBy !== null){
       ref = ref.orderBy(fieldOrderBy, orderByValue);
@@ -114,7 +117,7 @@ export default class DatabaseConnection {
 
 
     let result = await ref.then((value)=>{
-      return true;
+      return value;
     }).catch((error)=>{
       console.log(error);
       return false;
@@ -131,7 +134,7 @@ export default class DatabaseConnection {
     .then((value)=>{
       return true;
     }).catch((error)=>{
-      alert("Erro ao alterar usuário no firestore!");
+      alert("Erro ao alterar dados no firestore!");
       return error;
     });
 

@@ -1,0 +1,49 @@
+
+.ListaUsuarios .itemLista .t0 .produtoImagem{
+    max-width: 120px;
+    height: auto;
+    padding: 0;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+.ListaUsuarios .t0 {
+    width: 15%;
+}
+
+.filtroProduto{
+    width: 100%;
+    height: auto;
+    text-align: right;
+    margin-bottom: 25px;
+}
+
+.filtroProduto input,
+.filtroProduto select,
+.filtroProduto button{
+    margin-left: 15px;
+}
+
+.filtroProduto button{
+    height: 45px;
+    border: 0;
+    background: #66d166;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.ListaUsuarios .t5 {
+    min-width: 15%;    
+    text-align: right;
+}
+
+.ListaProdutos .t4{
+    text-align: left!important;
+    max-width: 20%;
+}
+
+.ListaProdutos .tituloLista{
+    padding: 0 15px;
+}

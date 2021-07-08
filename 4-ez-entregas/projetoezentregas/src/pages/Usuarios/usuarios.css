@@ -48,6 +48,7 @@
     border-radius: 3px;
     border: 0;
     padding: 10px;
+    display: inline-block;
 }
 .ListaUsuarios .itemLista div .btnEditar{
     background-color: #66d166;
