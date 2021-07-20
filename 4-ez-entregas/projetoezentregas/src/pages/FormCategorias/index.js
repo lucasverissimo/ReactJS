@@ -9,6 +9,7 @@ import Title from '../../components/Title';
 
 import { MdKeyboardBackspace } from 'react-icons/md';
 import { Link, useParams, useHistory } from 'react-router-dom';
+import './formCategorias.css';
 
 export default function FormCategorias() {
 
@@ -23,12 +24,13 @@ export default function FormCategorias() {
     const [ exibirMenu, setExibirMenu ] = useState(false);
     const [ loadingCad, setLoadingCad ] = useState(false);
     const [ editando, setEditando ] = useState(false);
+    const [ tipoSelecaoProduto, setTipoSelecaoProduto ] = useState(null);
 
     useEffect(async ()=>{
         if(id){            
             setEditando(true);
             await db.getDocument(id).then((value)=>{                
-                if(value === undefined){
+                if(value === 'undefined'){
                     alert('Erro ao localizar dado na base de dados, retornando para listagem...');
                     history.push('/categorias');
                     return;
@@ -39,6 +41,7 @@ export default function FormCategorias() {
                 setOrdem(value.ordem);
                 setExibirHome(value.exibirHome);
                 setExibirMenu(value.exibirMenu);
+                setTipoSelecaoProduto(value.tipoSelecaoProduto);
 
             });
         }
@@ -65,6 +68,13 @@ export default function FormCategorias() {
             if(tipo === TipoCategoria.CategoriaComplementar){
                 setExibirHome(false);
                 setExibirMenu(false);
+
+                if(tipoSelecaoProduto === null){
+                    alert('Selecione um tipo de seleção de produtos!');
+                    return;
+                }
+            }else{
+                setTipoSelecaoProduto(null);
             }
 
             let data = {
@@ -73,7 +83,8 @@ export default function FormCategorias() {
                 ordem: parseInt(ordem),
                 exibirHome: exibirHome,
                 exibirMenu: exibirMenu,
-            }      
+                tipoSelecaoProduto: tipoSelecaoProduto
+            }
             
             if(editando === true){
                 data = {
@@ -91,7 +102,7 @@ export default function FormCategorias() {
                 });
             }else{
                 await db.newDocument(data).then((value) => {
-                    if(value === true){
+                    if(value !== false){
                         alert("Cadastrado com sucesso!");
                         setNome('');
                         setTipo('');
@@ -117,6 +128,9 @@ export default function FormCategorias() {
         setTipo(e.target.value);
         setExibirMenu(false);
         setExibirHome(false);
+        if(e.target.value === TipoCategoria.CategoriaPrincipal){
+            setTipoSelecaoProduto(null);
+        }
     }
 
     return (
@@ -161,6 +175,15 @@ export default function FormCategorias() {
                         {tipo !== TipoCategoria.CategoriaPrincipal ? (
                             <div className={tipo !== TipoCategoria.CategoriaComplementar ? `hide` : ``}>
                                 <p>A categoria será exibida dentro do produto.</p>
+                                <div className="form-input">
+                                    <label>Selecione o tipo de seleção de produtos:</label>
+                                    <label>
+                                        <input type="radio" checked={tipoSelecaoProduto === 'radio'} name="tipoSelecaoProd" value="radio" onChange={(e)=>setTipoSelecaoProduto(e.target.value)}/> Só poderá selecionar uma unica opção no grupo.<br/>
+                                    </label>
+                                    <label>
+                                        <input type="radio" checked={tipoSelecaoProduto === 'checkbox'} name="tipoSelecaoProd" value="checkbox" onChange={(e)=>setTipoSelecaoProduto(e.target.value)} /> Poderá selecionar multiplos produtos no grupo.<br/>
+                                    </label>
+                                </div>
                             </div>
                         ) : (
                             <div>

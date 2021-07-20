@@ -1,0 +1,6 @@
+
+.form-input input[type="radio"],
+.form-input input[type="checkbox"]{
+    width: auto!important;
+    min-width: 20px!important;
+}

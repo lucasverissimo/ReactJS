@@ -3,18 +3,16 @@ import React, { useState, useEffect } from 'react';
 import DatabaseConnection from '../../database/DatabaseConnection';
 import TipoCategoria from '../../util/TipoCategoria';
 
-import './produtos.css';
 import Header from '../../components/Header';
 import Title from '../../components/Title';
 
 import { Link } from 'react-router-dom';
 
 import { MdSearch, MdAdd, MdDelete, MdEdit } from 'react-icons/md';
-import FilesManager from '../../database/FilesManager';
 
-export default function Produtos() {
+export default function ProdutosComplementares() {
 
-    const dbProduct = new DatabaseConnection('produtos');
+    const dbProduct = new DatabaseConnection('produtosComplementares');
     const dbCategory = new DatabaseConnection('categorias');
 
     const [ listaProdutos, setListaProdutos ] = useState([]);    
@@ -37,7 +35,7 @@ export default function Produtos() {
 
     async function loadCategorias(){
         setListaCategorias([]);
-        let r = await dbCategory.getListDocuments(100, 'nome', 'asc', 'tipo', TipoCategoria.CategoriaPrincipal).then((value)=>{
+        let r = await dbCategory.getListDocuments(100, 'nome', 'asc', 'tipo', TipoCategoria.CategoriaComplementar).then((value)=>{
             
             if(value.length > 0){
                 return value;
@@ -52,10 +50,8 @@ export default function Produtos() {
     async function loadProdutos(numItems = 10, orderByField = 'nome', orderBy = 'asc', whereField = null, whereValue = null){
         setListaProdutos([]);
         let r;
-        if(whereField !== null && whereValue !== null){
-            console.log(whereField, whereValue);
-            r = await dbProduct.getListDocuments(numItems, orderByField, orderBy, whereField, whereValue).then((value)=>{
-                console.log(value);
+        if((whereField !== null && whereValue !== null) && whereValue !== '0'){            
+            r = await dbProduct.getListDocuments(numItems, orderByField, orderBy, whereField, whereValue).then((value)=>{            
                 if(value.length > 0){
                     return value;
                 }else{
@@ -77,28 +73,21 @@ export default function Produtos() {
 
     async function buscarProduto(e){
         e.preventDefault();
-        if(categoriaSelecionada === '0'){
-            alert('Selecione ao menos uma categoria!');
-            return;
-        }else{
-            setLoadingLista(true);            
-            await loadProdutos(10, 'nome', 'asc', 'categoria', categoriaSelecionada);
-        }
+        setLoadingLista(true);            
+        await loadProdutos(10, 'nome', 'asc', 'categoria', categoriaSelecionada);
     }
 
-    async function deletarProduto(e, id, nomeImagem){
+    async function deletarProduto(e, id){
         if(window.confirm('Deseja mesmo excluir este produto? Esta ação é irreversível!')){           
             await dbProduct.deleteDocument(id).then(async (_)=>{
                 setLoadingLista(true);
-                const fmProduct = new FilesManager('produtos', '', nomeImagem);
-                await fmProduct.deleteDirectory(returnDelete);                
+                await returnDelete();                
             });
         }
     }
 
-    async function returnDelete(value){
+    async function returnDelete(){
         alert("Excluido!");
-        console.log(value);
         if(categoriaSelecionada === '0'){
             await loadProdutos(10, 'nome', 'asc');
         }else{
@@ -111,14 +100,14 @@ export default function Produtos() {
         <Header />
         <div className="container-conteudo container-usuarios">
             <Title>
-                <h1>Produtos - Lista de cadastrados</h1>
+                <h1>Produtos Complementares - Lista de cadastrados</h1>
                 <div className="group-btn-title">
-                    <Link to='/form-produtos'>
+                    <Link to='/form-produtos-complementares'>
                         <MdAdd size={32} color="#FFF" />
                     </Link>
                 </div>
             </Title>            
-            <div className="ListaUsuarios ListaProdutos">
+            <div className="ListaUsuarios">
 
                 <div className='filtroProduto'>
                     <form name="filtroProd" method="post" onSubmit={(e)=>buscarProduto(e)}>                        
@@ -137,9 +126,6 @@ export default function Produtos() {
                 </div>
 
                 <div className={`tituloLista ${listaProdutos.length === 0 ? `hide`: ``}`}>
-                    <div className="blocoTituloLista t0">
-                        Imagem
-                    </div>
                     <div className="blocoTituloLista t1">
                         Nome
                     </div>
@@ -150,9 +136,6 @@ export default function Produtos() {
                         Preço
                     </div>
                     <div className="blocoTituloLista t4">
-                        Estoque
-                    </div>
-                    <div className="blocoTituloLista t5">
                         Ações
                     </div>
                 </div>
@@ -186,10 +169,7 @@ export default function Produtos() {
                         precoFinal = '0.00';
                     }
                     return(
-                        <div className={index%2 === 0 ? `bgListaItem itemLista` : `itemLista`} key={index}>
-                            <div className="t0">
-                                <img src={produto.imagem} alt={produto.nome} className="produtoImagem" />
-                            </div>
+                        <div className={index%2 === 0 ? `bgListaItem itemLista` : `itemLista`} key={index}>                           
                             <div className="t1">
                                 {produto.nome}<br/>
                                 {produto.exibirProduto === false ? (<small>(Produto inativo para vendas)</small>): ``}
@@ -206,19 +186,12 @@ export default function Produtos() {
                                 )}
                                 
                             </div>
-                            <div className="t4">
-                                {produto.possuiEstoque === true ? (
-                                    <div>{produto.qtdEstoque}</div>
-                                ) : (
-                                    <div>Não possui estoque</div>
-                                )}
-                            </div>
-                            <div className="t5">  
+                            <div className="t4">  
                             
-                                <Link className="btnExcluir" to={`#`} onClick={e=>deletarProduto(e, produto.id, produto.nomeImagem)}>
+                                <Link className="btnExcluir" to={`#`} onClick={e=>deletarProduto(e, produto.id)}>
                                     <MdDelete size={18} color="#fff" />
                                 </Link>
-                                <Link className="btnEditar" to={`/form-produtos/${produto.id}`}>
+                                <Link className="btnEditar" to={`/form-produtos-complementares/${produto.id}`}>
                                     <MdEdit size={18} color="#fff" />
                                 </Link>
                             </div>

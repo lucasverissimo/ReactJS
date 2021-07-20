@@ -13,26 +13,27 @@ export default class FilesManager{
     }
 
     async uploadImage(file, funcCallback, nameCollection = null){
-
+        let _this = this;
+        
         await firebase.storage()
-        .ref(this.namePath+'/'+this.nameFolder+'/'+this.nameFile)
+        .ref(_this.namePath+'/'+_this.nameFile)
         .put(file)
         .then( async ()=>{            
 
             await firebase.storage()
-            .ref(this.namePath+'/'+this.nameFolder+'/')
-            .child(file.name)
+            .ref(_this.namePath+'/')
+            .child(_this.nameFile)
             .getDownloadURL()
-            .then(async (url)=>{
-
-                if(this.id !== null && nameCollection !== null){                
+            .then(async (url)=>{                
+                if(_this.id !== null && nameCollection !== null){                
                     const db = new DatabaseConnection(nameCollection);                
                     let data = {
-                        id: this.id,
+                        id: _this.id,
+                        nomeImagem: _this.nameFile,
                         imagem: url,
                     }
                     await db.updateDocument(data).then((value)=>{
-                        funcCallback(value);
+                        funcCallback(value, url);
                     });
     
                 }else{
@@ -48,6 +49,15 @@ export default class FilesManager{
             alert("Erro ao fazer upload da imagem, verifique o log de erros!");
             console.log(error);
             return null;
+        });
+    }
+
+    async deleteDirectory(callBackFunction){
+        await firebase.storage().ref(this.namePath+'/')
+        .child(this.nameFile)
+        .delete()
+        .then(async (value)=>{
+            await callBackFunction(value);
         });
     }
 

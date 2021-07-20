@@ -12,6 +12,8 @@ import Categorias from "../pages/Categorias";
 import FormCategorias from "../pages/FormCategorias";
 import Produtos from "../pages/Produtos";
 import FormProdutos from "../pages/FormProdutos";
+import ProdutosComplementares from "../pages/ProdutosComplementares";
+import FormProdutosComplementares from "../pages/FormProdutosComplementares";
 
 export default function Routes(){
    return(
@@ -26,6 +28,10 @@ export default function Routes(){
             <Route exact path="/form-categorias/:id" component={FormCategorias} isPrivate />
             <Route exact path="/produtos" component={Produtos} isPrivate />
             <Route exact path="/form-produtos" component={FormProdutos} isPrivate />
+            <Route exact path="/form-produtos/:id" component={FormProdutos} isPrivate />
+            <Route exact path="/produtos-complementares" component={ProdutosComplementares} isPrivate />
+            <Route exact path="/form-produtos-complementares" component={FormProdutosComplementares} isPrivate />
+            <Route exact path="/form-produtos-complementares/:id" component={FormProdutosComplementares} isPrivate />
             
             <Route component={NotFound} isPrivate />
         </Switch>
