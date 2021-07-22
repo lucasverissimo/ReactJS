@@ -25,8 +25,19 @@ export default class DatabaseConnection {
 
     let ref = this.ref;
 
-    if(whereField !== null && whereValue !== null){
-      ref = ref.where(whereField, "==", whereValue);
+    if(whereField !== null && whereValue !== null){     
+      
+      if(typeof whereField === 'object' && typeof whereValue === 'object'){
+        let i = 0;
+        for(i = 0; i < whereField.length; i++){
+          ref = ref.where(whereField[i], "==", whereValue[i]);        
+        }
+        console.log('consulta composta');
+      }else{
+        console.log('consulta simples');
+        ref = ref.where(whereField, "==", whereValue);
+      }
+      
     }
 
     if(fieldOrderBy !== null){
